@@ -1,22 +1,24 @@
 
+
 #ifndef CS2100_SORTING_MAURICIO_RODRIGUEZ_SORTING_H
 #define CS2100_SORTING_MAURICIO_RODRIGUEZ_SORTING_H
 
-#include <vector>
 #include <iostream>
+#include <vector>
 class Sorting {
 private:
-    std::vector<int> &container;
+    std::vector<int> &mainContainer;
     int prim;
     int ult;
-    void swap(std::vector<int> &cont,int &first, const int &last);
-    int posMinimo(std::vector<int> &cont, int &first, int &last);
+    int max(std::vector<int> cont2);
+    void combine(std::vector<int> &cont,std::vector<int> cont2,
+            const int &first, int &mit,const int &mit1,const int &last);
 public:
-    explicit Sorting(std::vector<int> &container,const int &prim,const int &ult) : container(container),
-    prim(prim),ult(ult){selectionSort();}
+    explicit Sorting(std::vector<int> &container,const int &prim,const int &ult) : mainContainer(container),
+    prim(prim), ult(ult){mergeSort(prim,ult);}
 
-    void selectionSort();
+    void mergeSort(const int first,const int last );
 };
 
 
-#endif
+#endif 
