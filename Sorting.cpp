@@ -1,45 +1,33 @@
+#include "Sorting.h"
 
-void Sorting::combine(std::vector<int> &cont,std::vector<int> lcont,const int &first,int &mit,const int &mit1, const int &last) {
-    int i1 = first ;int i2 = mit1;
-    int temp;
-   /* for (int i =0 ;i <last;i++)
-        std::cout<<lcont[i];
-    std::cout<<std::endl;*/
-    if (first>mit || mit1>last){}
-    else{
-        for (int k=first;k<last;k++){
-            if (lcont[i1]<=lcont[i2]){
-                cont[k]= lcont[i1];
-                if (i1<mit)
-                    i1++;
-                else
-                    lcont[i1] = max(lcont);
-            }
-            else{
-                cont[k] = lcont[i2];
-                if (i2<last)
-                    i2++;
-                else
-                    lcont[i2] = max(lcont);
-            }
-        }
+void Sorting::doHeap(const int &first, const int &last) {
+    for (int i= (last-first+1)/2 ;i>1;i--)
+        push(first,last,first+i-1);
+}
+
+void Sorting::heapSort(const int first, const int last) {
+    doHeap(first,last);
+    for (int i=last;i>first+1;i--){
+        swap(first,i);
+        push(first,i-1,first);
     }
 }
 
-void Sorting::mergeSort(const int first, const int last) {
-    if (first<last){
-        int mitad = (first+(last))/2;
-        mergeSort(first,mitad);
-        mergeSort(mitad+1,last);
-        combine(mainContainer,mainContainer,first,mitad,mitad+1,last);
+void Sorting::push(const int &first, const int &last, const int i) {
+    int k = i-first+1;
+    int j=k;
+    while (j!=k){
+    if (2*j<=(last-first+1) && mainContainer[2*j+first-1]> mainContainer[k+first-1])
+        k= 2*j;
+    if (2*j<(last-first+1) && mainContainer[2*j+first]> mainContainer[k+first-1])
+        k = 2*j+1;
+    swap(j+first-1,k+first-1);
     }
 }
 
-int Sorting::max(std::vector<int> cont2) {
-    auto max = cont2[0];
-    std::cout<<max;
-    for (int i =0 ;i<cont2.size();i++)
-        if (cont2[i]>max)
-            max = cont2[i];
-    return max;
+void Sorting::swap(const int first, const int second) {
+    int temp = mainContainer[first];
+    mainContainer[first] = mainContainer [second];
+    mainContainer[second] = temp;
 }
+
