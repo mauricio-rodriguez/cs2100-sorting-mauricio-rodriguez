@@ -1,4 +1,5 @@
 
+#include "Sorting.h"
 void Sorting::combine(std::vector<int> &cont,std::vector<int> lcont,const int &first,int &mit,const int &mit1, const int &last) {
     int i1 = first ;int i2 = mit1;
     int temp;
